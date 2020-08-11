@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">WikiTopicSearch</string>
+    <string name="network_error_message">Some thing went wrong, Please check your network connection.</string>
+    <string name="generic_error_message">Some thing went wrong, Please try later.</string>
+    <string name="loading">Loading...</string>
+    <string name="welcome">The Free Encyclopedia</string>
+    <string name="content_count">Count of title in the content is : %1$s</string>
+    <string name="no_data">Enter a valid topic to search</string>
+</resources>
