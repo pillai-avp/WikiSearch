@@ -1,9 +1,9 @@
 package com.vipps.wiki.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.vipps.wiki.R
 import com.vipps.wiki.model.WikiSearch
@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, R.string.loading, Toast.LENGTH_SHORT).show()
     }
 
+    // I could have implement data binding for the UI update.
     private fun updateCount(count: Int) {
         mainContent.visibility = View.VISIBLE
         banner.visibility = View.GONE

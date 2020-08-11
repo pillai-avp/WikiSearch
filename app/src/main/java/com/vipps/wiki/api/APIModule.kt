@@ -23,7 +23,6 @@ var serviceModule : Module = module {
             .baseUrl("https://en.wikipedia.org/w/api.php/")
             .addConverterFactory(get())
             .build()
-
         retrofit.create(WikiServices::class.java)
     }
 }

@@ -9,7 +9,9 @@ import org.koin.core.context.startKoin
 class WikiApplication : Application(){
     override fun onCreate(){
         super.onCreate()
-        // start Koin!
+
+        // start Koin dependency injection framework!
+
         startKoin {
             // declare used Android context
             androidContext(this@WikiApplication)

@@ -6,18 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vipps.wiki.R
-import com.vipps.wiki.result.Result
 import com.vipps.wiki.getErrorMessage
-import com.vipps.wiki.result.succeeded
 import com.vipps.wiki.model.HtmlData
 import com.vipps.wiki.model.WikiSearch
-import com.vipps.wiki.repo.ContentSearch
 import com.vipps.wiki.repo.WikiRepository
-import com.vipps.wiki.repo.countOfSubString
 import com.vipps.wiki.repo.countUsingKMP
+import com.vipps.wiki.result.Result
+import com.vipps.wiki.result.succeeded
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class MainViewModel(private val application: Application,
                     private val wikiRepository: WikiRepository): ViewModel() {
@@ -74,20 +71,27 @@ class MainViewModel(private val application: Application,
         query: String
     ) {
         networkState.postValue(
-                TopicSearchResult.DataReady((it as Result.Success).data!!)
+            TopicSearchResult.DataReady((it as Result.Success).data!!)
         )
         countTheTopicInData(it.data!!.parse.htmlDataObject, query)
     }
 
+    /**
+     * Do the counting of index string in the html data
+     * and update the [GrepResult]
+     */
     private fun countTheTopicInData(wholeData: HtmlData, query: String) {
-        val result = try {
-            //val first = wholeData.htmlString.countOfSubString(query)
-            val second = wholeData.htmlString.countUsingKMP(query)
-            GrepResult.Success<Int>(second)
-        } catch (e: Exception){
-            GrepResult.Error(e.getErrorMessage(application))
+        viewModelScope.launch {
+            val result = try {
+                //val first = wholeData.htmlString.countOfSubString(query)
+                val second = wholeData.htmlString.countUsingKMP(query)
+                GrepResult.Success<Int>(second)
+            } catch (e: Exception) {
+                GrepResult.Error(e.getErrorMessage(application))
+            }
+            grepState.postValue(result)
         }
-        grepState.postValue(result)
+
     }
 
 }

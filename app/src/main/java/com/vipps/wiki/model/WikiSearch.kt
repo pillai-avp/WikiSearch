@@ -13,6 +13,9 @@ data class Parse(
         val title: String
 )
 
+/**
+ * Data received from wikipedia
+ */
 data class WikiSearch(
-    val parse: Parse
+        val parse: Parse
 )

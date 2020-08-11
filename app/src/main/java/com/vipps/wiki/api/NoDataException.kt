@@ -9,7 +9,4 @@ package com.vipps.wiki.api
  *
  * Date: 09 August 2020
  */
-class NoDataException(message: String = "NO_DATA_FOUND") : Exception(message) {
-
-
-}
+class NoDataException(message: String = "NO_DATA_FOUND") : Exception(message)
