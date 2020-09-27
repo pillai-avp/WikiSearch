@@ -1,8 +1,8 @@
-package com.vipps.wiki
+package net.insi8.wiki
 
 import android.app.Application
-import com.vipps.wiki.api.serviceModule
-import com.vipps.wiki.main.mainModule
+import net.insi8.wiki.api.serviceModule
+import net.insi8.wiki.main.mainModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

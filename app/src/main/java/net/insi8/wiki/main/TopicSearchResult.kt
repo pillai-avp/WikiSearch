@@ -1,7 +1,7 @@
-package com.vipps.wiki.main
+package net.insi8.wiki.main
 
-import com.vipps.wiki.main.TopicSearchResult.*
-import com.vipps.wiki.model.WikiSearch
+import net.insi8.wiki.main.TopicSearchResult.*
+import net.insi8.wiki.model.WikiSearch
 
 /**
  * This is build as container for data with proper UI state.

@@ -1,4 +1,4 @@
-package com.vipps.wiki.model
+package net.insi8.wiki.model
 import com.google.gson.annotations.SerializedName
 
 data class HtmlData(

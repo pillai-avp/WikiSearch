@@ -1,4 +1,4 @@
-package com.vipps.wiki.api
+package net.insi8.wiki.api
 
 import com.google.gson.Gson
 import org.koin.core.module.Module

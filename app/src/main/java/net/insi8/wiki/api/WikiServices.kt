@@ -1,6 +1,6 @@
-package com.vipps.wiki.api
+package net.insi8.wiki.api
 
-import com.vipps.wiki.model.WikiSearch
+import net.insi8.wiki.model.WikiSearch
 import retrofit2.http.GET
 import retrofit2.http.Query
 

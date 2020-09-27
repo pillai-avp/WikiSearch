@@ -1,11 +1,11 @@
-package com.vipps.wiki.repo
+package net.insi8.wiki.repo
 
-import com.vipps.wiki.api.NoDataException
-import com.vipps.wiki.api.WikiServices
-import com.vipps.wiki.model.WikiSearch
-import com.vipps.wiki.result.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import net.insi8.wiki.api.NoDataException
+import net.insi8.wiki.api.WikiServices
+import net.insi8.wiki.model.WikiSearch
+import net.insi8.wiki.result.Result
 
 interface WikiRepository {
     suspend fun getDataForTopic(topic : String): Flow<Result<WikiSearch?>>

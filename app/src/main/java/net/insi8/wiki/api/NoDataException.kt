@@ -1,4 +1,4 @@
-package com.vipps.wiki.api
+package net.insi8.wiki.api
 
 
 /**

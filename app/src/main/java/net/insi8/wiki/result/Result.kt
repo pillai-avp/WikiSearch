@@ -1,7 +1,6 @@
-package com.vipps.wiki.result
+package net.insi8.wiki.result
 
-import com.vipps.wiki.result.Result.Success
-import java.lang.Exception
+import net.insi8.wiki.result.Result.Success
 
 
 sealed class Result<out T> {

@@ -1,7 +1,7 @@
-package com.vipps.wiki
+package net.insi8.wiki
 
 import android.app.Application
-import com.vipps.wiki.api.NoDataException
+import net.insi8.wiki.api.NoDataException
 import retrofit2.HttpException
 
 /**

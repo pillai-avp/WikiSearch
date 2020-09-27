@@ -1,14 +1,14 @@
-package com.vipps.wiki.main
+package net.insi8.wiki.main
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.vipps.wiki.R
-import com.vipps.wiki.model.WikiSearch
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_content_view.*
+import net.insi8.wiki.R
+import net.insi8.wiki.model.WikiSearch
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.vipps.wiki.repo
+package net.insi8.wiki.repo
 
 
 /**
