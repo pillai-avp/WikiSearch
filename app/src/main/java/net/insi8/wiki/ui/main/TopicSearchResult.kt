@@ -13,3 +13,11 @@ sealed class TopicSearchResult<out T> {
     data class Error<out T>(val errorMessage: String) : TopicSearchResult<T>()
 }
 
+/**
+ *
+ */
+sealed class GrepResult<out T> {
+    data class Success<T>(val count: Int) : GrepResult<T>()
+    data class Error(val errorMessage: String) : GrepResult<Nothing>()
+}
+

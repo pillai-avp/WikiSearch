@@ -24,13 +24,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configureUI() {
+        webViewConfigurations()
         btnSearch.setOnClickListener {
             viewModel.doSearch(editSearch.text.toString())
         }
+    }
 
+    private fun webViewConfigurations() {
         val webSettings = webView.settings
         webSettings.useWideViewPort = false
-        webSettings.javaScriptEnabled = true
+        webSettings.javaScriptEnabled = false
         webSettings.loadWithOverviewMode = true
         webSettings.builtInZoomControls = false
         webSettings.domStorageEnabled = true
@@ -44,6 +47,13 @@ class MainActivity : AppCompatActivity() {
                 is TopicSearchResult.DataReady -> setDataToWebView(it.result)
                 is TopicSearchResult.Loading -> updateLoading()
                 is TopicSearchResult.Error -> showErrorMessage(it.errorMessage)
+            }
+        })
+
+        viewModel.grepStateLiveData.observe(this, Observer {
+            when (it) {
+                is GrepResult.Success -> updateCount(it.count)
+                is GrepResult.Error -> showErrorMessage(it.errorMessage)
             }
         })
     }
