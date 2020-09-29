@@ -20,12 +20,11 @@ class WikiRepositoryImpl(
      * Get data from wiki network resource.
      * the flow first emit a Loading event, and once the api came back with result,
      * the flow or stream is updated with new data.
-     * return [Flow<Result<WikiSearch>>]
+     * @return [Flow<Result<WikiSearch>>]
      */
     override suspend fun getDataForTopic(topic: String): Flow<Result<WikiSearch?>> {
         return flow {
             emit(Result.Loading())
-
             val searchResult = try {
                 val wikiSearch = wikiServices.searchTopic(topic = topic)
                 validateResponse(wikiSearch)

@@ -1,4 +1,4 @@
-package net.insi8.wiki.main
+package net.insi8.wiki.ui.main
 
 import net.insi8.wiki.repo.WikiRepository
 import net.insi8.wiki.repo.WikiRepositoryImpl

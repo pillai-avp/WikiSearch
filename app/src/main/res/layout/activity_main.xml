@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:padding="5dp"
     android:layout_height="match_parent"
-    tools:context="net.insi8.wiki.main.MainActivity">
+    tools:context=".ui.main.MainActivity">
 
     <ImageView
         android:id="@+id/btnSearch"

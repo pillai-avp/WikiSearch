@@ -1,4 +1,4 @@
-package net.insi8.wiki.main
+package net.insi8.wiki.ui.main
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -9,10 +9,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.insi8.wiki.R
 import net.insi8.wiki.getErrorMessage
-import net.insi8.wiki.model.HtmlData
 import net.insi8.wiki.model.WikiSearch
 import net.insi8.wiki.repo.WikiRepository
-import net.insi8.wiki.repo.countUsingKMP
 import net.insi8.wiki.result.Result
 import net.insi8.wiki.result.succeeded
 
@@ -20,11 +18,6 @@ class MainViewModel(
     private val application: Application,
     private val wikiRepository: WikiRepository
 ) : ViewModel() {
-
-    val grepStateLiveData: LiveData<GrepResult<Int>>
-        get() = grepState
-    private val grepState: MutableLiveData<GrepResult<Int>> = MutableLiveData()
-
 
     val networkStateLiveData: LiveData<TopicSearchResult<WikiSearch>>
         get() = networkState
@@ -35,7 +28,7 @@ class MainViewModel(
         if (validateUserInput(query)){
             viewModelScope.launch {
                 wikiRepository.getDataForTopic(query).collect {
-                    handleSearchResult(it, query)
+                    handleSearchResult(it)
                 }
             }
         } else {
@@ -46,13 +39,12 @@ class MainViewModel(
     private fun validateUserInput(query: String): Boolean = query.isNotEmpty()
 
     private fun handleSearchResult(
-        it: Result<WikiSearch?>,
-        query: String
+        it: Result<WikiSearch?>
     ) {
         when {
             it is Result.Loading -> networkState.postValue(TopicSearchResult.Loading())
             it.succeeded -> {
-                onSuccessResult(it, query)
+                onSuccessResult(it)
             }
             else -> {
                 onError((it as Result.Error).exception.getErrorMessage(application))
@@ -69,31 +61,11 @@ class MainViewModel(
     }
 
     private fun onSuccessResult(
-        it: Result<WikiSearch?>,
-        query: String
+        it: Result<WikiSearch?>
     ) {
         networkState.postValue(
             TopicSearchResult.DataReady((it as Result.Success).data!!)
         )
-        countTheTopicInData(it.data!!.parse.htmlDataObject, query)
-    }
-
-    /**
-     * Do the counting of index string in the html data
-     * and update the [GrepResult]
-     */
-    private fun countTheTopicInData(wholeData: HtmlData, query: String) {
-        viewModelScope.launch {
-            val result = try {
-                //val first = wholeData.htmlString.countOfSubString(query)
-                val second = wholeData.htmlString.countUsingKMP(query)
-                GrepResult.Success<Int>(second)
-            } catch (e: Exception) {
-                GrepResult.Error(e.getErrorMessage(application))
-            }
-            grepState.postValue(result)
-        }
-
     }
 
 }

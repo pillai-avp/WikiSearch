@@ -1,7 +1,8 @@
-package net.insi8.wiki.main
+package net.insi8.wiki.ui.main
 
 import android.os.Bundle
 import android.view.View
+import android.webkit.WebSettings
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -26,6 +27,15 @@ class MainActivity : AppCompatActivity() {
         btnSearch.setOnClickListener {
             viewModel.doSearch(editSearch.text.toString())
         }
+
+        val webSettings = webView.settings
+        webSettings.useWideViewPort = false
+        webSettings.javaScriptEnabled = true
+        webSettings.loadWithOverviewMode = true
+        webSettings.builtInZoomControls = false
+        webSettings.domStorageEnabled = true
+
+        webSettings.cacheMode = WebSettings.LOAD_NO_CACHE
     }
 
     private fun observeDataEvents() {
@@ -34,13 +44,6 @@ class MainActivity : AppCompatActivity() {
                 is TopicSearchResult.DataReady -> setDataToWebView(it.result)
                 is TopicSearchResult.Loading -> updateLoading()
                 is TopicSearchResult.Error -> showErrorMessage(it.errorMessage)
-            }
-        })
-
-        viewModel.grepStateLiveData.observe(this, Observer {
-            when (it) {
-                is GrepResult.Success -> updateCount(it.count)
-                is GrepResult.Error -> showErrorMessage(it.errorMessage)
             }
         })
     }
@@ -55,7 +58,6 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, R.string.loading, Toast.LENGTH_SHORT).show()
     }
 
-    // I could have implement data binding for the UI update.
     private fun updateCount(count: Int) {
         mainContent.visibility = View.VISIBLE
         banner.visibility = View.GONE

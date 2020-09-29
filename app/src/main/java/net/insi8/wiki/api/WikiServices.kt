@@ -14,4 +14,5 @@ interface WikiServices {
             @Query("format") format :String = "json",
             @Query("page") topic :String
     ) : WikiSearch
+
 }

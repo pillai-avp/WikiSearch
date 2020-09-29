@@ -15,7 +15,8 @@
         android:theme="@style/Theme.WikiTopicSearch"
         tools:ignore="AllowBackup">
 
-        <activity android:name=".main.MainActivity"
+        <activity
+            android:name="net.insi8.wiki.ui.main.MainActivity"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
